@@ -137,12 +137,14 @@ def main(args):
         }
         data_params = config['data']     
         evaluation_params = config['evaluation']
+        
+        cuda0 = torch.device('cuda:0')
 
     model = load_model(args.model_type, model_params)
     sampler = Sampler(**sampler_params)
     
     model.load_state_dict(torch.load(evaluation_params['model_path'], 
-                                     map_location='cpu').state_dict(), strict=False)
+                                     map_location=cuda0).state_dict(), strict=False)
     print(model)
     model.eval()
             
