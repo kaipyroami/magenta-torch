@@ -141,6 +141,7 @@ def main(args):
         cuda0 = torch.device('cuda:0')
 
     model = load_model(args.model_type, model_params)
+    model=model.cuda(cuda0)
     sampler = Sampler(**sampler_params)
     
     model.load_state_dict(torch.load(evaluation_params['model_path'], 
